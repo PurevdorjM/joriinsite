@@ -4,13 +4,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: "./src/js/index.js",
   output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: "js/main.js",
+    path: path.resolve(__dirname, "docs"),
   },
 
   devtool: "inline-source-map",
   devServer: {
-    contentBase: "./dist",
+    contentBase: "./docs",
   },
 
   plugins: [
