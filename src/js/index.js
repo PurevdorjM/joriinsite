@@ -105,15 +105,16 @@ const controlRecipe = async () => {
 const controlList = () => {
   // Найрлаганы мопелийг үүсгэнэ.
   state.list = new List();
+
   // Өмнө нь байсан мэдээллүүдийг арилгах
   listView.clearItems();
 
   // Уг моделруу одоо харагдаж байгаа жорны бүх найрлагыг авч хийнэ.
   state.recipe.ingredients.forEach((n) => {
     // Тухайн найрлагыг моделруу хийнэ
-    state.list.addItem(n);
+    const item = state.list.addItem(n);
     // Тухайн найрлагыг дэлгэцэнд гаргана
-    listView.renderItem(n);
+    listView.renderItem(item);
   });
 };
 
@@ -121,4 +122,15 @@ elements.recipeDiv.addEventListener("click", (e) => {
   if (e.target.matches(".recipe__btn, .recipe__btn *")) {
     controlList();
   }
+});
+
+elements.shoppingList.addEventListener("click", (e) => {
+  // Клик хийсэн li элементийн data-itemid атрибутыг шүүж гаргаж авах
+  const id = e.target.closest(".shopping__item").dataset.itemid;
+
+  // Олдсон ID-тэй орцыг моделоос устгана.
+  state.list.deleteItem(id);
+
+  // Дэлгэцээс ийм ID-тэй орцыг бас устгана
+  listView.deleteItem(id);
 });
